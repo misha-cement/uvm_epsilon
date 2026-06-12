@@ -38,13 +38,13 @@ class u_monitor_base extends uvm_monitor;
 
     virtual task run_phase (uvm_phase phase);
         forever begin
-           wait(~m_vif.rst);
+           wait(~m_vif.aresetn);
            fork
                a_master_monitor();
                b_master_monitor();
                slave_monitor();
            join_none
-           wait(m_vif.rst);
+           wait(m_vif.aresetn);
            disable fork;
         end
     endtask
@@ -54,7 +54,7 @@ class u_monitor_base extends uvm_monitor;
         int cnt = 0;
         forever begin
             a_m_data_item = new();
-            @(posedge m_vif.clk);
+            @(posedge m_vif.aclk);
             if (m_vif.a_m_tready && m_vif.a_m_tvalid) begin
                 a_m_data_item.data = m_vif.a_m_tdata;
                 cnt++;
@@ -67,7 +67,7 @@ class u_monitor_base extends uvm_monitor;
         int cnt = 0;
         forever begin
             b_m_data_item = new();
-            @(posedge m_vif.clk);
+            @(posedge m_vif.aclk);
             if (m_vif.b_m_tready && m_vif.b_m_tvalid) begin
                 b_m_data_item.data = m_vif.b_m_tdata;
                 cnt++;
@@ -80,7 +80,7 @@ class u_monitor_base extends uvm_monitor;
     virtual task slave_monitor();
         forever begin
             s_data_item = new();
-            @(posedge s_vif.clk);
+            @(posedge s_vif.aclk);
             if (s_vif.s_tready && s_vif.s_tvalid) begin
                 s_data_item.data = s_vif.s_tdata;
                 mon_s_ap.write(s_data_item);

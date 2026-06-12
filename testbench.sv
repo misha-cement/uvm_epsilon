@@ -4,19 +4,19 @@ module testbench;
     import uvm_pkg::*;
     import test_pkg::*;
 
-    logic clk, rst;
+    logic aclk, aresetn;
 
     localparam width = 16;
     localparam depth = 16;
 
-    m_intf m_if (clk, rst);
-    s_intf s_if (clk, rst);
+    m_intf m_if (aclk, aresetn);
+    s_intf s_if (aclk, aresetn);
 
     a_plus_b_on_fifo  #(.width (width),
                         .depth (depth))
                        u_dut
-                      (.clk          (clk),
-                       .rst          (rst),
+                      (.aclk         (aclk),
+                       .aresetn      (aresetn),
                        .a_m_tvalid   (m_if.a_m_tvalid),
                        .b_m_tvalid   (m_if.b_m_tvalid),
                        .a_m_tready   (m_if.a_m_tready),
@@ -29,25 +29,25 @@ module testbench;
 
 
     initial begin
-        clk = 0;
+        aclk = 0;
         forever begin
-            #5; clk = ~clk;
+            #5; aclk = ~aclk;
         end
     end
 
     initial begin
-        repeat(4) @(posedge clk);
-        rst = 1; 
-        @(posedge clk);
-        rst <= 0;
-        repeat(1024) @(posedge clk);
-        rst = 1;
-        @(posedge clk);
-        rst <= 0;
+        repeat(4) @(posedge aclk);
+        aresetn = 1; 
+        @(posedge aclk);
+        aresetn <= 0;
+        repeat(1024) @(posedge aclk);
+        aresetn = 1;
+        @(posedge aclk);
+        aresetn <= 0;
     end
 
     initial begin
-        repeat(10000) @(posedge clk);
+        repeat(10000) @(posedge aclk);
         $display("Timeout");
         $stop();
     end

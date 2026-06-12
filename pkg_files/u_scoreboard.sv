@@ -33,11 +33,11 @@ class u_scoreboard_base extends uvm_scoreboard;
         bit [15:0] exp_out;
         bit [15:0] act_out;
         forever begin
-            wait(~vif.rst);
+            wait(~vif.aresetn);
             fork
                 compare(exp_out, act_out);
             join_none
-            wait(vif.rst);
+            wait(vif.aresetn);
             disable fork;
             while(!a_m_fifo.is_empty()) a_m_fifo.get(a_m_data_item);
             while(!b_m_fifo.is_empty()) b_m_fifo.get(b_m_data_item);
@@ -48,7 +48,7 @@ class u_scoreboard_base extends uvm_scoreboard;
 
     virtual task compare (bit[15:0] exp_out, bit[15:0] act_out);
         forever begin
-            @(posedge vif.clk);
+            @(posedge vif.aclk);
             if (vif.s_tvalid && vif.s_tready) begin
                 a_m_fifo.get(a_m_data_item);
                 b_m_fifo.get(b_m_data_item);

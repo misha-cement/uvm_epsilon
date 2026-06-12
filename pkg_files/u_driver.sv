@@ -21,10 +21,10 @@ class u_a_master_driver_base extends uvm_driver#(u_a_master_item);
 
     virtual task run_phase (uvm_phase phase);
         forever begin
-            wait(~vif.rst);
+            wait(~vif.aresetn);
             fork
                forever begin
-                   @(posedge vif.clk);
+                   @(posedge vif.aclk);
                    // Holds m_tvalid and input data until m_tready = 1
                    if (vif.a_m_tvalid && ~vif.a_m_tready) begin
                    end
@@ -33,7 +33,7 @@ class u_a_master_driver_base extends uvm_driver#(u_a_master_item);
                    end
                end
             join_none
-            wait(vif.rst);
+            wait(vif.aresetn);
             disable fork;
         end
     endtask: run_phase
@@ -73,10 +73,10 @@ class u_b_master_driver_base extends uvm_driver#(u_b_master_item);
 
     virtual task run_phase (uvm_phase phase);
         forever begin
-            wait(~vif.rst);
+            wait(~vif.aresetn);
             fork
                forever begin
-                   @(posedge vif.clk);
+                   @(posedge vif.aclk);
                    // Holds m_tvalid and input data until m_tready = 1
                    if (vif.b_m_tvalid && ~vif.b_m_tready) begin
                    end
@@ -85,7 +85,7 @@ class u_b_master_driver_base extends uvm_driver#(u_b_master_item);
                    end
                end
             join_none
-            wait(vif.rst);
+            wait(vif.aresetn);
             disable fork;
         end
     endtask: run_phase
@@ -127,16 +127,16 @@ class u_slave_driver_base extends uvm_driver#(u_slave_item);
 
     task run_phase (uvm_phase phase);
         forever begin
-            wait(~vif.rst);
+            wait(~vif.aresetn);
             fork
                 forever begin
-                    @(posedge vif.clk);
+                    @(posedge vif.aclk);
                     seq_item_port.get_next_item(s_item);
                         vif.s_tready <= s_item.s_tready;
                     seq_item_port.item_done();
                 end
             join_none
-            wait(vif.rst);
+            wait(vif.aresetn);
             disable fork;
         end
     endtask: run_phase

@@ -2,7 +2,7 @@ module fifo_shift_register_pointer
     #(parameter width,
       parameter depth)
 
-     (input  logic clk, rst,
+     (input  logic aclk, aresetn,
 
       input  logic m_tvalid,
       output logic m_tready,
@@ -21,8 +21,8 @@ module fifo_shift_register_pointer
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    always_ff @(posedge clk)
-       if (rst)
+    always_ff @(posedge aclk)
+       if (aresetn)
          begin
          wr_pnter[depth - 1]   <= '1;
          wr_pnter[depth - 2:0] <= '0;
@@ -33,16 +33,18 @@ module fifo_shift_register_pointer
     genvar i;
     generate
       for (i = 0; i < depth; i ++) begin: jj
-        always_ff @(posedge clk)
+        always_ff @(posedge aclk)
           if ((wr_pnter[i] && push))
             data[i] <= wr_data;
         end
     endgenerate
 
+
+
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    always_ff @(posedge clk)
-       if (rst)
+    always_ff @(posedge aclk)
+       if (aresetn)
          begin
          rd_pnter[depth - 1]   <= '1;
          rd_pnter[depth - 2:0] <= '0;
@@ -61,8 +63,8 @@ module fifo_shift_register_pointer
 
     logic last_action; //
 
-    always_ff @(posedge clk)
-      if (rst)
+    always_ff @(posedge aclk)
+      if (aresetn)
         last_action <= '0;
       else if (pop && push)
         last_action <= last_action;
