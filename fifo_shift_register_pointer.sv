@@ -39,8 +39,6 @@ module fifo_shift_register_pointer
         end
     endgenerate
 
-
-
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     always_ff @(posedge aclk)
