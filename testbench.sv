@@ -9,7 +9,8 @@ module testbench;
     localparam width = 16;
     localparam depth = 16;
 
-    m_intf m_if (aclk, aresetn);
+    a_m_intf a_m_if (aclk, aresetn);
+    b_m_intf b_m_if (aclk, aresetn);
     s_intf s_if (aclk, aresetn);
 
     a_plus_b_on_fifo  #(.width (width),
@@ -17,15 +18,15 @@ module testbench;
                        u_dut
                       (.aclk         (aclk),
                        .aresetn      (aresetn),
-                       .a_m_tvalid   (m_if.a_m_tvalid),
-                       .b_m_tvalid   (m_if.b_m_tvalid),
-                       .a_m_tready   (m_if.a_m_tready),
-                       .b_m_tready   (m_if.b_m_tready),
-                       .s_tvalid     (s_if.s_tvalid),
-                       .s_tready     (s_if.s_tready),
-                       .a_m_tdata    (m_if.a_m_tdata),
-                       .b_m_tdata    (m_if.b_m_tdata),
-                       .s_tdata      (s_if.s_tdata));
+                       .a_m_tvalid   (a_m_if.tvalid),
+                       .b_m_tvalid   (b_m_if.tvalid),
+                       .a_m_tready   (a_m_if.tready),
+                       .b_m_tready   (b_m_if.tready),
+                       .s_tvalid     (s_if.tvalid),
+                       .s_tready     (s_if.tready),
+                       .a_m_tdata    (a_m_if.tdata),
+                       .b_m_tdata    (b_m_if.tdata),
+                       .s_tdata      (s_if.tdata));
 
 
     initial begin
@@ -54,7 +55,8 @@ module testbench;
 
         
     initial begin
-        uvm_config_db #(virtual m_intf)::set (null, "*", "vif", m_if);
+        uvm_config_db #(virtual a_m_intf)::set (null, "*", "vif", a_m_if);
+        uvm_config_db #(virtual b_m_intf)::set (null, "*", "vif", b_m_if);
         uvm_config_db #(virtual s_intf)::set (null, "*", "vif", s_if);
         run_test("u_test_base");
     end

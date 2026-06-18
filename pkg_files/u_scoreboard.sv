@@ -49,12 +49,12 @@ class u_scoreboard_base extends uvm_scoreboard;
     virtual task compare (bit[15:0] exp_out, bit[15:0] act_out);
         forever begin
             @(posedge vif.aclk);
-            if (vif.s_tvalid && vif.s_tready) begin
+            if (vif.tvalid && vif.tready) begin
                 a_m_fifo.get(a_m_data_item);
                 b_m_fifo.get(b_m_data_item);
                 s_fifo.get(s_data_item);
-                exp_out = a_m_data_item.data + b_m_data_item.data;
-                act_out = s_data_item.data;
+                exp_out = a_m_data_item.tdata + b_m_data_item.tdata;
+                act_out = s_data_item.tdata;
                 if (act_out != exp_out) begin
                     `uvm_info("ERROR", $sformatf("Error, expected: 0x%0h, actual: 0x%0h", exp_out, act_out), UVM_LOW)
                 end
