@@ -12,7 +12,8 @@ class u_test_base extends uvm_test;
     u_b_m_sequence u_b_m_sqnce;
     u_s_sequence u_s_sqnce;
 
-    int sim_time = 2048;
+    int n_cycles   = 16;
+    int cycle_time = 64;
 
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
@@ -23,9 +24,12 @@ class u_test_base extends uvm_test;
     endfunction
 
     virtual task run_phase(uvm_phase phase);
-       u_a_m_sqnce.sim_time = this.sim_time;
-       u_b_m_sqnce.sim_time = this.sim_time;
-       u_s_sqnce.sim_time   = this.sim_time;
+       u_a_m_sqnce.n_cycles   = this.n_cycles;
+       u_b_m_sqnce.n_cycles   = this.n_cycles;
+       u_s_sqnce.n_cycles     = this.n_cycles;
+       u_a_m_sqnce.cycle_time = this.cycle_time;
+       u_b_m_sqnce.cycle_time = this.cycle_time;
+       u_s_sqnce.cycle_time   = this.cycle_time;
        super.run_phase(phase);
 
        phase.raise_objection(this);
