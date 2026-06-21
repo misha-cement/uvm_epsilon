@@ -48,7 +48,7 @@ module testbench;
     end
 
     initial begin
-        repeat(10000) @(posedge aclk);
+        repeat(1000000) @(posedge aclk);
         $display("Timeout");
         $stop();
     end

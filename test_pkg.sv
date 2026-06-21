@@ -2,6 +2,8 @@
 package test_pkg;
 import uvm_pkg::*;
 
+`include "./pkg_files/u_config.sv"
+
 `include "./pkg_files/u_seq_item.sv"
 
 `include "./pkg_files/u_driver.sv"
