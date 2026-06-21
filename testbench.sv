@@ -57,7 +57,7 @@ module testbench;
     initial begin
         uvm_config_db #(virtual a_m_intf)::set (null, "*", "vif", a_m_if);
         uvm_config_db #(virtual b_m_intf)::set (null, "*", "vif", b_m_if);
-        uvm_config_db #(virtual s_intf)::set (null, "*", "vif", s_if);
+        uvm_config_db #(virtual s_intf) :: set (null, "*", "vif", s_if);
         run_test("u_test_base");
     end
 

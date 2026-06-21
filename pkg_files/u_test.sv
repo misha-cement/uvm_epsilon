@@ -18,7 +18,7 @@ class u_test_base extends uvm_test;
 
     virtual function void configure_cfg();
         u_test_cfg.n_cycles   = 16;
-        u_test_cfg.cycle_time = 200;
+        u_test_cfg.cycle_time = 512;
         uvm_config_db # (u_test_config)::set(this, "*", "u_test_cfg", u_test_cfg);
     endfunction
 

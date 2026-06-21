@@ -1,6 +1,3 @@
-
-
-
 class u_test_config extends uvm_object;
 
     `uvm_object_utils(u_test_config)
