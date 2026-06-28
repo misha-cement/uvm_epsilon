@@ -10,6 +10,9 @@ class u_monitor_base extends uvm_monitor;
 
     typedef bit [15:0] tdata;
 
+    //the purpose of these mailboxes is to put tdata from each interface,
+    // get each tdata when s_vif.tvalid && s_vif.tready happens and put
+    // all of them to one packet
     mailbox #(tdata) a_m_mbx;
     mailbox #(tdata) b_m_mbx;
     mailbox #(tdata) s_mbx  ;
