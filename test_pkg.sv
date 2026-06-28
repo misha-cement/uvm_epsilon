@@ -12,6 +12,8 @@ import uvm_pkg::*;
 
 `include "./pkg_files/u_scoreboard.sv"
 
+`include "./pkg_files/u_coverage.sv"
+
 `include "./pkg_files/u_agent.sv"
 
 `include "./pkg_files/u_env.sv"

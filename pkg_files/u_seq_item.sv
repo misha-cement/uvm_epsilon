@@ -47,18 +47,19 @@ class u_slave_item extends uvm_sequence_item;
 endclass: u_slave_item
 
 
-
+//item for analysis connections
 class u_data_item extends uvm_sequence_item;
 
     `uvm_object_utils(u_data_item)
 
-    bit [15:0] tdata;
+    bit [15:0] a_m_tdata;
+    bit [15:0] b_m_tdata;
+    bit [15:0] s_tdata;
 
     function new (string name = "u_data_item");
         super.new(name);
     endfunction
 
 endclass: u_data_item
-
 
 
