@@ -1,6 +1,7 @@
 class u_a_m_sequence_base extends uvm_sequence;
      `uvm_object_utils(u_a_m_sequence_base)
 
+     //these integers determine values in dist constraint in sequence_item
      rand int tvalid_one_freq;
      rand int tvalid_zero_freq;
 

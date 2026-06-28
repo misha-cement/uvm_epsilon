@@ -10,7 +10,7 @@ class u_test_base extends uvm_test;
     u_env_base u_env;
     u_a_m_top_sequence u_a_m_sqnce;
     u_b_m_top_sequence u_b_m_sqnce;
-    u_s_top_sequence u_s_sqnce;
+    u_s_top_sequence   u_s_sqnce;
 
     virtual s_intf vif;
 
@@ -19,7 +19,7 @@ class u_test_base extends uvm_test;
     virtual function void configure_cfg();
         u_test_cfg.n_cycles   = 16;
         u_test_cfg.cycle_time = 512;
-        uvm_config_db # (u_test_config)::set(this, "*", "u_test_cfg", u_test_cfg);
+        uvm_config_db #(u_test_config)::set(this, "*", "u_test_cfg", u_test_cfg);
     endfunction
 
 

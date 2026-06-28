@@ -1,5 +1,3 @@
-
-
 class u_scoreboard_base extends uvm_scoreboard;
     
     `uvm_component_utils(u_scoreboard_base)
@@ -21,15 +19,10 @@ class u_scoreboard_base extends uvm_scoreboard;
         bit [15:0] act_out;
         exp_out = item.a_m_tdata + item.b_m_tdata;
         act_out = item.s_tdata;
-        $display("nitori");
         if (act_out != exp_out) begin
             `uvm_info("ERROR", $sformatf("Error, expected: 0x%0h, actual: 0x%0h", exp_out, act_out), UVM_LOW)
         end
     endfunction
 
-
-    virtual function void check_phase (uvm_phase phase);
-
-    endfunction
 
 endclass

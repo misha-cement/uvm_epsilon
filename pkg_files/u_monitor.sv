@@ -52,7 +52,7 @@ class u_monitor_base extends uvm_monitor;
                a_master_monitor();
                b_master_monitor();
                slave_monitor();
-               put_to_analysis_port();
+               put_in_analysis_port();
            join_none
            wait(a_m_vif.aresetn);
            disable fork;
@@ -97,7 +97,7 @@ class u_monitor_base extends uvm_monitor;
         end
     endtask
 
-    virtual task put_to_analysis_port;
+    virtual task put_in_analysis_port;
         tdata a_m_tdata;
         tdata b_m_tdata;
         tdata s_tdata;
