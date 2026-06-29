@@ -55,26 +55,22 @@ class u_monitor_base extends uvm_monitor;
 
 
     virtual task a_master_monitor();
-        int cnt = 0;
         forever begin
             a_m_data_item = new();
             @(posedge a_m_vif.aclk);
             if (a_m_vif.tready && a_m_vif.tvalid) begin
                 a_m_data_item.tdata = a_m_vif.tdata;
-                cnt++;
                 mon_a_m_ap.write(a_m_data_item);
             end
         end
     endtask
 
     virtual task b_master_monitor();
-        int cnt = 0;
         forever begin
             b_m_data_item = new();
             @(posedge b_m_vif.aclk);
             if (b_m_vif.tready && b_m_vif.tvalid) begin
                 b_m_data_item.tdata = b_m_vif.tdata;
-                cnt++;
                 mon_b_m_ap.write(b_m_data_item);
             end
         end

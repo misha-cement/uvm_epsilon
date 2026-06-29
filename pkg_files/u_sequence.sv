@@ -1,6 +1,7 @@
 class u_a_m_sequence_base extends uvm_sequence;
      `uvm_object_utils(u_a_m_sequence_base)
 
+     //these integers determine values in dist constraint in sequence_item
      rand int tvalid_one_freq;
      rand int tvalid_zero_freq;
 
@@ -62,7 +63,6 @@ class u_a_m_top_sequence extends uvm_sequence;
 
          if (!uvm_config_db # (u_test_config)::get(null, get_full_name(), "u_test_cfg", u_test_cfg)) begin
             `uvm_fatal("NOCFG", {"can't get config" });
-
          end
 
 

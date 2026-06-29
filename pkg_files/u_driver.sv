@@ -25,7 +25,7 @@ class u_a_master_driver_base extends uvm_driver#(u_a_master_item);
             fork
                forever begin
                    @(posedge vif.aclk);
-                   // Holds m_tvalid and input data until m_tready = 1
+                   // Holds tvalid and input data until tready = 1
                    if (vif.tvalid && ~vif.tready) begin
                    end
                    else begin
@@ -77,7 +77,7 @@ class u_b_master_driver_base extends uvm_driver#(u_b_master_item);
             fork
                forever begin
                    @(posedge vif.aclk);
-                   // Holds m_tvalid and input data until m_tready = 1
+                   // Holds tvalid and input data until tready = 1
                    if (vif.tvalid && ~vif.tready) begin
                    end
                    else begin
