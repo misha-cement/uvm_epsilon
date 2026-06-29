@@ -4,3 +4,5 @@ fifo_shift_register_pointer.sv - fifo с valid/ready
 
 a_plus_b_on_fifo.sv - модуль на fifo, складывающий два числа. Два fifo, fifo_a и fifo_b, с независимыми друг от друга интерфейсами,
 принимают числа a и b, результат сложения записывается в третий fifo.
+
+sim.sh - скрипт для запуска окружения в QuestaSim
